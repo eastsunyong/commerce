@@ -13,7 +13,9 @@ function RecommandProducts({ category, productId }: { category: string; productI
     <div>
       <div className="text-zinc-700 ml-2 md:ml-8 mt-6">추천 상품</div>
       <div className="flex flex-row justify-center md:mt-10 mt-5">
-        {!isLoading && recommands && recommands[0] != undefined ? (
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : recommands && recommands.length > 0 ? (
           <Carousel opts={{ align: "start" }} className="w-11/12">
             <CarouselContent>
               {recommands.map((product: DocumentData) => (
@@ -77,4 +79,5 @@ function RecommandProducts({ category, productId }: { category: string; productI
     </div>
   );
 }
+
 export default memo(RecommandProducts);

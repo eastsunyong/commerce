@@ -15,7 +15,7 @@ export default function Product() {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("id");
 
-  const { loading, product } = useGetProduct(productId);
+  const { isLoading, product } = useGetProduct(productId);
   const { deleteProduct, mutateAlertContent, setMutateShowAlert, mutateShowAlert } = useDeleteProductMutation();
   const { alertContent, showAlert, setShowAlert, setConfirm, setAlertContent, confirm } = useShowAlert();
 
@@ -31,7 +31,7 @@ export default function Product() {
       <Alert alertContent={alertContent} setShowAlert={setShowAlert} showAlert={showAlert} setConfirm={setConfirm} />
 
       <div className="flex flex-col">
-        {!loading && product ? (
+        {!isLoading && product ? (
           <>
             <ProductInfo product={product} isAdmin={true} />
             <div className="w-full right-0 flex justify-end items-center gap-3 mt-5">

@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { fbGetProduct } from "@/services/firebase/product";
+import { ProductType } from "@/types/product";
 
 export default function useGetProduct(productId: string | null) {
-  const { data: product, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["product", productId],
     queryFn: async () => {
       if (!productId || productId === "") {
@@ -13,5 +14,5 @@ export default function useGetProduct(productId: string | null) {
     },
   });
 
-  return { isLoading, product };
+  return { isLoading, product: data as ProductType };
 }

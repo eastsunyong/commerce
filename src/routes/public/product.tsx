@@ -16,12 +16,12 @@ export default function Product() {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("id");
   const userId = useContext(AuthContext)?.id || null;
-  const { loading, product } = useGetProduct(productId);
+  const { isLoading, product } = useGetProduct(productId);
   const { isAdded, setIsAdded, quantity, setQuantity } = useCheckIsInBasket(productId);
   const { addToBasket } = useBasket();
   return (
     <div className="flex flex-col">
-      {!loading && product ? (
+      {!isLoading && product ? (
         <ProductInfo product={product} isAdmin={false} quantity={quantity} setQuantity={setQuantity} />
       ) : (
         <></>

@@ -9,6 +9,7 @@ import useUploadProductMutation from "@/hooks/product/useUploadProductMutation";
 import useUploadProduct from "@/hooks/product/useUploadProduct";
 import Combobox from "./ui/comboBox";
 import Alert from "./alert";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProductForm({ product }: { product?: ProductType }) {
   const isEdit = product ? true : false;
@@ -26,6 +27,7 @@ export default function AddProductForm({ product }: { product?: ProductType }) {
     setShowAlert,
     alertContent,
   } = useUploadProduct(uploadProduct, product);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -449,8 +451,26 @@ export default function AddProductForm({ product }: { product?: ProductType }) {
                 />
                 <div />
               </div>
-              <div className="flex w-full justify-center">
-                <Button id="upload_product" type="submit" className="mt-6 mb-12 w-32" disabled={isPending}>
+              <div className="flex w-full justify-center gap-4">
+                <Button
+                  type="button"
+                  onClick={() => {
+                    if (confirm("상품 등록을 취소하시겠습니까?")) {
+                      navigate(-1);
+                    }
+                  }}
+                  id="upload_product"
+                  className="mt-6 mb-12 w-32 bg-white border border-zinc-700 text-zinc-700 hover:bg-zinc-100"
+                  disabled={isPending}
+                >
+                  취소하기
+                </Button>
+                <Button
+                  id="upload_product"
+                  type="submit"
+                  className="mt-6 mb-12 w-32 bg-zinc-700  hover:bg-zinc-800"
+                  disabled={isPending}
+                >
                   상품 등록
                 </Button>
               </div>
